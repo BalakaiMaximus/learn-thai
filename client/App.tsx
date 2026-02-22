@@ -84,7 +84,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.logo}>Learn Thai 🙏</Text>
+        <Text style={styles.logo}>Thai Craft</Text>
         <Text style={styles.tagline}>Master the language of smiles</Text>
       </View>
 
