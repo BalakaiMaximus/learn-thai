@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     borderColor: '#555',
   },
   choiceButtonPlay: {
-    borderColor: '#55FF55',
+    borderColor: '#555',
   },
   choiceIcon: {
     fontSize: 32,
