@@ -7,7 +7,6 @@ services:
     name: learn-thai-web
     runtime: static
     plan: free
-    region: singapore
     rootDir: client
     buildCommand: npm install && npm install --save-dev @expo/webpack-config && npx expo export:web
     staticPublishPath: web-build
