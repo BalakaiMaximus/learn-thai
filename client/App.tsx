@@ -222,6 +222,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     borderWidth: 3,
     borderColor: '#555',
   },
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     flex: 1,
     letterSpacing: 2,
     marginBottom: 14,
+    textAlign: 'center',
   },
   choiceDesc: {
     fontSize: 12,
