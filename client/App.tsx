@@ -1,14 +1,20 @@
-import React from 'react';
-import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, Alert, Modal } from 'react-native';
 
 export default function App() {
+  const [showChoices, setShowChoices] = useState(false);
+
   const handleStart = () => {
-    Alert.alert('⚔️ Welcome to Thai Craft!', 'Your Thai language adventure begins now. Let\'s craft some words! ⛏️');
+    setShowChoices(true);
+  };
+
+  const handleChoice = (choice) => {
+    Alert.alert(`You chose: ${choice}!`, `Starting ${choice} mode... ⛏️`);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Background texture layers */}
+      {/* Background */}
       <View style={styles.sky} />
       <View style={styles.clouds}>
         <Text style={styles.cloud}>☁️</Text>
@@ -16,19 +22,19 @@ export default function App() {
       </View>
       
       <View style={styles.content}>
-        {/* Pixelated Title */}
+        {/* Title */}
         <View style={styles.titleContainer}>
           <Text style={styles.title}>THAI CRAFT</Text>
         </View>
         
         <Text style={styles.subtitle}>Craft your Thai skills one block at a time!</Text>
         
-        {/* Minecraft-style Start Button */}
+        {/* Start Button */}
         <TouchableOpacity style={styles.startButton} onPress={handleStart}>
           <Text style={styles.startButtonText}>▶ START</Text>
         </TouchableOpacity>
         
-        {/* Decorative blocks */}
+        {/* Blocks */}
         <View style={styles.blocks}>
           <Text style={styles.block}>🪵</Text>
           <Text style={styles.block}>🧱</Text>
@@ -39,10 +45,49 @@ export default function App() {
         <Text style={styles.footer}>Build with @thai_craft_bot</Text>
       </View>
       
-      {/* Grass ground */}
+      {/* Ground */}
       <View style={styles.ground}>
         <Text style={styles.groundTexture}>🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛</Text>
       </View>
+
+      {/* Choice Modal */}
+      <Modal
+        visible={showChoices}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowChoices(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Choose Your Path ⛏️</Text>
+            
+            <TouchableOpacity 
+              style={styles.choiceButton} 
+              onPress={() => handleChoice('Learn')}
+            >
+              <Text style={styles.choiceIcon}>📚</Text>
+              <Text style={styles.choiceTitle}>Learn</Text>
+              <Text style={styles.choiceDesc}>Study Thai vocabulary & tones</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.choiceButton, styles.choiceButtonPlay]} 
+              onPress={() => handleChoice('Practice')}
+            >
+              <Text style={styles.choiceIcon}>🎮</Text>
+              <Text style={styles.choiceTitle}>Practice</Text>
+              <Text style={styles.choiceDesc}>Test your skills with games</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.closeButton}
+              onPress={() => setShowChoices(false)}
+            >
+              <Text style={styles.closeButtonText}>✕ Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -50,7 +95,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#87CEEB', // Sky blue
+    backgroundColor: '#87CEEB',
   },
   sky: {
     position: 'absolute',
@@ -90,7 +135,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#55FF55', // Minecraft green
+    color: '#55FF55',
     fontFamily: 'Courier',
     letterSpacing: 4,
   },
@@ -101,7 +146,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier',
   },
   startButton: {
-    backgroundColor: '#7C7C7C', // Minecraft button gray
+    backgroundColor: '#7C7C7C',
     borderWidth: 4,
     borderColor: '#3d3d3d',
     borderBottomColor: '#1a1a1a',
@@ -136,14 +181,74 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 60,
-    backgroundColor: '#5D4037', // Dirt brown
+    backgroundColor: '#5D4037',
     borderTopWidth: 6,
-    borderTopColor: '#4CAF50', // Grass green
+    borderTopColor: '#4CAF50',
     justifyContent: 'center',
     alignItems: 'center',
   },
   groundTexture: {
     fontSize: 12,
     color: '#4CAF50',
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '85%',
+    backgroundColor: '#2d2d2d',
+    borderRadius: 16,
+    padding: 24,
+    borderWidth: 4,
+    borderColor: '#3d3d3d',
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#55FF55',
+    textAlign: 'center',
+    marginBottom: 24,
+    fontFamily: 'Courier',
+  },
+  choiceButton: {
+    backgroundColor: '#3d3d3d',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#555',
+  },
+  choiceButtonPlay: {
+    borderColor: '#55FF55',
+  },
+  choiceIcon: {
+    fontSize: 32,
+    marginRight: 16,
+  },
+  choiceTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+    flex: 1,
+  },
+  choiceDesc: {
+    fontSize: 12,
+    color: '#999',
+  },
+  closeButton: {
+    marginTop: 12,
+    padding: 12,
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    color: '#999',
+    fontSize: 14,
   },
 });
