@@ -218,8 +218,8 @@ const styles = StyleSheet.create({
   choiceButton: {
     backgroundColor: '#3d3d3d',
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    padding: 20,
+    marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 3,
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   },
   choiceIcon: {
     fontSize: 32,
-    marginRight: 16,
+    marginRight: 20,
   },
   choiceTitle: {
     fontSize: 18,
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
     color: 'white',
     flex: 1,
     letterSpacing: 1,
+    marginBottom: 4,
   },
   choiceDesc: {
     fontSize: 12,
