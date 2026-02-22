@@ -237,10 +237,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     flex: 1,
+    letterSpacing: 1,
   },
   choiceDesc: {
     fontSize: 12,
     color: '#999',
+    letterSpacing: 0.5,
   },
   closeButton: {
     marginTop: 12,
