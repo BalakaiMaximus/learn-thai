@@ -2,55 +2,14 @@
 # See https://render.com/docs/blueprint-spec for reference
 
 services:
-  # Backend API Service
-  - type: web
-    name: learn-thai-api
-    runtime: node
-    plan: free
-    region: singapore
-    rootDir: server
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 5001
-      - key: CLIENT_URL
-        value: https://learn-thai-web.onrender.com
-      - key: SECRET_KEY
-        generateValue: true
-      - key: ATLAS_URI
-        sync: false  # Set this manually in Render dashboard
-      - key: DB_NAME
-        value: learn_thai
-      - key: STRIPE_SECRET_KEY
-        sync: false  # Set this manually
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false  # Set this manually
-      - key: GOOGLE_CLIENT_ID
-        sync: false  # Set this manually
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false  # Set this manually
-      - key: AWS_ACCESS_KEY_ID
-        sync: false  # Set this manually
-      - key: AWS_SECRET_ACCESS_KEY
-        sync: false  # Set this manually
-      - key: AWS_REGION
-        value: ap-southeast-1
-      - key: AWS_SES_FROM_EMAIL
-        value: noreply@learnthai.app
-      - key: GEMINI_API
-        sync: false  # Optional - for AI features
-
-  # Frontend Web Service (Expo Web)
+  # Frontend Web Service (Expo Web) - Static Site
   - type: web
     name: learn-thai-web
     runtime: static
     plan: free
     region: singapore
     rootDir: client
-    buildCommand: npm install && npx expo export:web
+    buildCommand: npm install && npm install --save-dev @expo/webpack-config && npx expo export:web
     staticPublishPath: web-build
     envVars:
       - key: NODE_ENV
