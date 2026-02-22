@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     color: 'white',
     flex: 1,
     letterSpacing: 2,
-    marginBottom: 10,
+    marginBottom: 14,
   },
   choiceDesc: {
     fontSize: 12,
