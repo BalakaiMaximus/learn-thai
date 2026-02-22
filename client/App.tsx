@@ -74,7 +74,7 @@ export default function App() {
               style={[styles.choiceButton, styles.choiceButtonPlay]} 
               onPress={() => handleChoice('Study Mode')}
             >
-              <Text style={styles.choiceIcon}>🔤</Text>
+              <Text style={styles.choiceIcon}>📚</Text>
               <Text style={styles.choiceTitle}>Study Mode</Text>
               <Text style={styles.choiceDesc}>Learn Thai Letters & Rules</Text>
             </TouchableOpacity>
