@@ -65,7 +65,7 @@ export default function App() {
               style={styles.choiceButton} 
               onPress={() => handleChoice('Word Quest')}
             >
-              <Text style={styles.choiceIcon}>📖</Text>
+              <Text style={styles.choiceIcon}>😊</Text>
               <Text style={styles.choiceTitle}>Word Quest</Text>
               <Text style={styles.choiceDesc}>Learn by reading daily words</Text>
             </TouchableOpacity>
