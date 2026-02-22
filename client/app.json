@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Learn Thai",
+    "slug": "learn-thai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "learnthai",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF6B35"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.balakai.learnthai"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FF6B35"
+      },
+      "package": "com.balakai.learnthai"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-dev-client"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "92152bf0-ef9f-4e67-9acc-3f5170953f48"
+      }
+    },
+    "owner": "zahnno"
+  }
+}

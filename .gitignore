@@ -1,0 +1,54 @@
+# Environment files
+server/.env
+server/config.env
+
+# Keystores and signing configs
+client/android/keystore.properties
+client/android/local.properties
+client/android/app/*.keystore
+client/android/app/*.jks
+
+# Dependencies
+node_modules/
+server/node_modules/
+client/node_modules/
+
+# Build artifacts
+client/android/app/build/
+client/android/.gradle/
+client/ios/build/
+client/.expo/
+client/dist/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+server/logs/
+client/logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Testing
+coverage/
+.nyc_output/
