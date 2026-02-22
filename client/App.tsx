@@ -63,20 +63,20 @@ export default function App() {
             
             <TouchableOpacity 
               style={styles.choiceButton} 
-              onPress={() => handleChoice('Learn')}
+              onPress={() => handleChoice('Word Quest')}
             >
-              <Text style={styles.choiceIcon}>📚</Text>
-              <Text style={styles.choiceTitle}>Learn</Text>
-              <Text style={styles.choiceDesc}>Study Thai vocabulary & tones</Text>
+              <Text style={styles.choiceIcon}>📖</Text>
+              <Text style={styles.choiceTitle}>Word Quest</Text>
+              <Text style={styles.choiceDesc}>Learn by reading daily words</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
               style={[styles.choiceButton, styles.choiceButtonPlay]} 
-              onPress={() => handleChoice('Practice')}
+              onPress={() => handleChoice('Study Mode')}
             >
-              <Text style={styles.choiceIcon}>🎮</Text>
-              <Text style={styles.choiceTitle}>Practice</Text>
-              <Text style={styles.choiceDesc}>Test your skills with games</Text>
+              <Text style={styles.choiceIcon}>🔤</Text>
+              <Text style={styles.choiceTitle}>Study Mode</Text>
+              <Text style={styles.choiceDesc}>Learn Thai Letters & Rules</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
