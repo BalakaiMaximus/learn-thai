@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   },
   choiceIcon: {
     fontSize: 32,
-    marginRight: 20,
+    marginRight: 24,
   },
   choiceTitle: {
     fontSize: 18,
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     color: 'white',
     flex: 1,
     letterSpacing: 2,
-    marginBottom: 6,
+    marginBottom: 10,
   },
   choiceDesc: {
     fontSize: 12,
