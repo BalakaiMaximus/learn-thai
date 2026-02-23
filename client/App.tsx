@@ -1,17 +1,117 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, Alert, Modal } from 'react-native';
+import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function App() {
-  const [showChoices, setShowChoices] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'wordquest', 'studymode'
 
   const handleStart = () => {
-    setShowChoices(true);
+    setCurrentPage('choices');
   };
 
   const handleChoice = (choice) => {
-    Alert.alert(`You chose: ${choice}!`, `Starting ${choice} mode... ⛏️`);
+    if (choice === 'Word Quest') {
+      setCurrentPage('wordquest');
+    } else if (choice === 'Study Mode') {
+      setCurrentPage('studymode');
+    }
   };
 
+  const goHome = () => {
+    setCurrentPage('home');
+  };
+
+  const goBack = () => {
+    setCurrentPage('choices');
+  };
+
+  // ============ WORD QUEST PAGE ============
+  if (currentPage === 'wordquest') {
+    const words = [
+      { thai: 'สวัสดี', roman: 'Sawasdee', meaning: 'Hello' },
+      { thai: 'ขอบคุณ', roman: 'Khob Khun', meaning: 'Thank you' },
+      { thai: 'สบายดี', roman: 'Sabai Dee', meaning: 'Good/Well' },
+      { thai: 'หิว', roman: 'Hio', meaning: 'Hungry' },
+      { thai: 'เหนื่อย', roman: 'Neuy', meaning: 'Tired' },
+      { thai: 'มา', roman: 'Maa', meaning: 'Come' },
+      { thai: 'ไป', roman: 'Pai', meaning: 'Go' },
+      { thai: 'กิน', roman: 'Gin', meaning: 'Eat' },
+      { thai: 'ดื่ม', roman: 'Deum', meaning: 'Drink' },
+      { thai: 'นอน', roman: 'Non', meaning: 'Sleep' },
+    ];
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.pageHeader}>
+          <TouchableOpacity onPress={goBack} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.pageTitle}>📖 Word Quest</Text>
+          <View style={{ width: 60 }} />
+        </View>
+        
+        <ScrollView style={styles.wordList}>
+          {words.map((word, index) => (
+            <View key={index} style={styles.wordCard}>
+              <Text style={styles.wordThai}>{word.thai}</Text>
+              <Text style={styles.wordRoman}>{word.roman}</Text>
+              <Text style={styles.wordMeaning}>{word.meaning}</Text>
+            </View>
+          ))}
+        </ScrollView>
+        
+        <View style={styles.ground}>
+          <Text style={styles.groundTexture}>🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // ============ STUDY MODE PAGE ============
+  if (currentPage === 'studymode') {
+    const consonants = [
+      { letter: 'ก', name: 'Ko Kai', sound: 'G' },
+      { letter: 'ข', name: 'Kho Khai', sound: 'K' },
+      { letter: 'ฃ', name: 'Kho Khuat', sound: 'K' },
+      { letter: 'ค', name: 'Kho Kong', sound: 'K' },
+      { letter: 'ฅ', name: 'Kho Son', sound: 'K' },
+      { letter: 'ฆ', name: 'Kho Rai', sound: 'K' },
+      { letter: 'ง', name: 'Ngo Ngu', sound: 'NG' },
+      { letter: 'จ', name: 'Cho Chan', sound: 'J' },
+      { letter: 'ฉ', name: 'Cho Ching', sound: 'CH' },
+      { letter: 'ช', name: 'Cho Chang', sound: 'CH' },
+    ];
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.pageHeader}>
+          <TouchableOpacity onPress={goBack} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.pageTitle}>📚 Study Mode</Text>
+          <View style={{ width: 60 }} />
+        </View>
+        
+        <ScrollView style={styles.wordList}>
+          <Text style={styles.sectionTitle}>Thai Consonants (Class 1)</Text>
+          {consonants.map((item, index) => (
+            <View key={index} style={styles.studyCard}>
+              <Text style={styles.studyLetter}>{item.letter}</Text>
+              <View style={styles.studyInfo}>
+                <Text style={styles.studyName}>{item.name}</Text>
+                <Text style={styles.studySound}>Sound: /{item.sound}/</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+        
+        <View style={styles.ground}>
+          <Text style={styles.groundTexture}>🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // ============ HOME PAGE ============
   return (
     <SafeAreaView style={styles.container}>
       {/* Background */}
@@ -51,12 +151,7 @@ export default function App() {
       </View>
 
       {/* Choice Modal */}
-      <Modal
-        visible={showChoices}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowChoices(false)}
-      >
+      {currentPage === 'choices' && (
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Choose Your Path ⛏️</Text>
@@ -66,28 +161,32 @@ export default function App() {
               onPress={() => handleChoice('Word Quest')}
             >
               <Text style={styles.choiceIcon}>😊</Text>
-              <Text style={styles.choiceTitle}>Word Quest</Text>
-              <Text style={styles.choiceDesc}>Learn by reading daily words</Text>
+              <View style={styles.choiceTextContainer}>
+                <Text style={styles.choiceTitle}>Word Quest</Text>
+                <Text style={styles.choiceDesc}>Learn by reading daily words</Text>
+              </View>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={[styles.choiceButton, styles.choiceButtonPlay]} 
+              style={styles.choiceButton} 
               onPress={() => handleChoice('Study Mode')}
             >
               <Text style={styles.choiceIcon}>📚</Text>
-              <Text style={styles.choiceTitle}>Study Mode</Text>
-              <Text style={styles.choiceDesc}>Learn Thai Letters & Rules</Text>
+              <View style={styles.choiceTextContainer}>
+                <Text style={styles.choiceTitle}>Study Mode</Text>
+                <Text style={styles.choiceDesc}>Learn Thai Letters & Rules</Text>
+              </View>
             </TouchableOpacity>
             
             <TouchableOpacity 
               style={styles.closeButton}
-              onPress={() => setShowChoices(false)}
+              onPress={goHome}
             >
               <Text style={styles.closeButtonText}>✕ Close</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      )}
     </SafeAreaView>
   );
 }
@@ -194,7 +293,11 @@ const styles = StyleSheet.create({
 
   // Modal Styles
   modalOverlay: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.8)',
     justifyContent: 'center',
     alignItems: 'center',
@@ -222,30 +325,27 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
     borderWidth: 3,
-    borderColor: '#555',
-  },
-  choiceButtonPlay: {
     borderColor: '#555',
   },
   choiceIcon: {
     fontSize: 32,
-    marginRight: 24,
+    marginRight: 16,
+  },
+  choiceTextContainer: {
+    flex: 1,
   },
   choiceTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-    flex: 1,
     letterSpacing: 2,
-    marginBottom: 14,
-    textAlign: 'center',
   },
   choiceDesc: {
     fontSize: 12,
     color: '#999',
     letterSpacing: 1,
+    marginTop: 4,
   },
   closeButton: {
     marginTop: 12,
@@ -255,5 +355,99 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#999',
     fontSize: 14,
+  },
+
+  // Page Header
+  pageHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#1a1a1a',
+    borderBottomWidth: 4,
+    borderBottomColor: '#3d3d3d',
+  },
+  backButton: {
+    padding: 8,
+  },
+  backButtonText: {
+    color: '#55FF55',
+    fontSize: 16,
+    fontFamily: 'Courier',
+  },
+  pageTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#55FF55',
+    fontFamily: 'Courier',
+  },
+
+  // Word List
+  wordList: {
+    flex: 1,
+    padding: 16,
+  },
+  wordCard: {
+    backgroundColor: '#2d2d2d',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 3,
+    borderColor: '#3d3d3d',
+  },
+  wordThai: {
+    fontSize: 32,
+    color: '#55FF55',
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  wordRoman: {
+    fontSize: 18,
+    color: '#FFF',
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  wordMeaning: {
+    fontSize: 14,
+    color: '#999',
+  },
+
+  // Study Mode
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    marginBottom: 16,
+    marginTop: 8,
+  },
+  studyCard: {
+    backgroundColor: '#2d2d2d',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#3d3d3d',
+  },
+  studyLetter: {
+    fontSize: 48,
+    color: '#FFD700',
+    fontWeight: 'bold',
+    width: 80,
+  },
+  studyInfo: {
+    flex: 1,
+  },
+  studyName: {
+    fontSize: 18,
+    color: '#FFF',
+    fontWeight: 'bold',
+  },
+  studySound: {
+    fontSize: 14,
+    color: '#999',
+    marginTop: 4,
   },
 });
