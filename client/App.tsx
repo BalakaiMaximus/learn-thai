@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'wordquest', 'studymode'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'wordquest', 'studymode', 'practice'
 
   const handleStart = () => {
     setCurrentPage('choices');
@@ -13,6 +13,8 @@ export default function App() {
       setCurrentPage('wordquest');
     } else if (choice === 'Study Mode') {
       setCurrentPage('studymode');
+    } else if (choice === 'Practice') {
+      setCurrentPage('practice');
     }
   };
 
@@ -111,6 +113,63 @@ export default function App() {
     );
   }
 
+  // ============ PRACTICE PAGE (BOTH) ============
+  if (currentPage === 'practice') {
+    const words = [
+      { thai: 'สวัสดี', roman: 'Sawasdee', meaning: 'Hello' },
+      { thai: 'ขอบคุณ', roman: 'Khob Khun', meaning: 'Thank you' },
+      { thai: 'สบายดี', roman: 'Sabai Dee', meaning: 'Good/Well' },
+      { thai: 'หิว', roman: 'Hio', meaning: 'Hungry' },
+      { thai: 'เหนื่อย', roman: 'Neuy', meaning: 'Tired' },
+    ];
+
+    const consonants = [
+      { letter: 'ก', name: 'Ko Kai', sound: 'G' },
+      { letter: 'ข', name: 'Kho Khai', sound: 'K' },
+      { letter: 'ค', name: 'Kho Kong', sound: 'K' },
+      { letter: 'ง', name: 'Ngo Ngu', sound: 'NG' },
+      { letter: 'จ', name: 'Cho Chan', sound: 'J' },
+    ];
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.pageHeader}>
+          <TouchableOpacity onPress={goBack} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.pageTitle}>🎯 Practice Mode</Text>
+          <View style={{ width: 60 }} />
+        </View>
+        
+        <ScrollView style={styles.wordList}>
+          <Text style={styles.sectionTitle}>📖 Word Quest Review</Text>
+          {words.map((word, index) => (
+            <View key={`word-${index}`} style={styles.wordCard}>
+              <Text style={styles.wordThai}>{word.thai}</Text>
+              <Text style={styles.wordRoman}>{word.roman}</Text>
+              <Text style={styles.wordMeaning}>{word.meaning}</Text>
+            </View>
+          ))}
+          
+          <Text style={[styles.sectionTitle, { marginTop: 24 }]}>📚 Consonants Review</Text>
+          {consonants.map((item, index) => (
+            <View key={`cons-${index}`} style={styles.studyCard}>
+              <Text style={styles.studyLetter}>{item.letter}</Text>
+              <View style={styles.studyInfo}>
+                <Text style={styles.studyName}>{item.name}</Text>
+                <Text style={styles.studySound}>Sound: /{item.sound}/</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+        
+        <View style={styles.ground}>
+          <Text style={styles.groundTexture}>🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   // ============ HOME PAGE ============
   return (
     <SafeAreaView style={styles.container}>
@@ -175,6 +234,17 @@ export default function App() {
               <View style={styles.choiceTextContainer}>
                 <Text style={styles.choiceTitle}>Study Mode</Text>
                 <Text style={styles.choiceDesc}>Learn Thai Letters & Rules</Text>
+              </View>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.choiceButton, styles.choiceButtonPlay]} 
+              onPress={() => handleChoice('Practice')}
+            >
+              <Text style={styles.choiceIcon}>🎯</Text>
+              <View style={styles.choiceTextContainer}>
+                <Text style={styles.choiceTitle}>Practice</Text>
+                <Text style={styles.choiceDesc}>Review Words & Letters</Text>
               </View>
             </TouchableOpacity>
             
@@ -327,6 +397,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 3,
     borderColor: '#555',
+  },
+  choiceButtonPlay: {
+    borderColor: '#00FF00',
   },
   choiceIcon: {
     fontSize: 32,
