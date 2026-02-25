@@ -178,6 +178,9 @@ export default function App() {
       <View style={styles.clouds}>
         <Text style={styles.cloud}>☁️</Text>
         <Text style={styles.cloud}>☁️</Text>
+        <Text style={[styles.cloud, styles.cloudSmall]}>☁️</Text>
+        <Text style={styles.cloud}>☁️</Text>
+        <Text style={[styles.cloud, styles.cloudLarge]}>☁️</Text>
       </View>
       
       <View style={styles.content}>
@@ -286,6 +289,14 @@ const styles = StyleSheet.create({
   cloud: {
     fontSize: 40,
     opacity: 0.8,
+  },
+  cloudSmall: {
+    fontSize: 28,
+    marginTop: 15,
+  },
+  cloudLarge: {
+    fontSize: 52,
+    marginTop: -10,
   },
   content: {
     flex: 1,
