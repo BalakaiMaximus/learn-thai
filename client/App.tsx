@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
   footer: {
     position: 'absolute',
     bottom: 80,
-    fontSize: 1al: '555',
+    fontSize: 10,
     fontFamily: 'Courier',
   },
   ground: {
