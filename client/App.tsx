@@ -268,7 +268,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#87CEEB',
+    backgroundColor: '#8A2BE2', /* New */
   },
   sky: {
     position: 'absolute',
@@ -352,8 +352,7 @@ const styles = StyleSheet.create({
   footer: {
     position: 'absolute',
     bottom: 80,
-    fontSize: 10,
-    color: '#555',
+    fontSize: 1al: '555',
     fontFamily: 'Courier',
   },
   ground: {
