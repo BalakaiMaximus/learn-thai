@@ -315,10 +315,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier',
   },
   startButton: {
-    backgroundColor: '#22C55E',
+    backgroundColor: '#3B82F6',
     borderWidth: 4,
-    borderColor: '#16A34A',
-    borderBottomColor: '#15803D',
+    borderColor: '#2563EB',
+    borderBottomColor: '#1D4ED8',
     paddingVertical: 14,
     paddingHorizontal: 48,
     marginBottom: 30,
