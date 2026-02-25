@@ -181,6 +181,7 @@ export default function App() {
         <Text style={[styles.cloud, styles.cloudSmall]}>☁️</Text>
         <Text style={styles.cloud}>☁️</Text>
         <Text style={[styles.cloud, styles.cloudLarge]}>☁️</Text>
+        <Text style={[styles.cloud, styles.cloudSmall]}>☁️</Text>
       </View>
       
       <View style={styles.content}>
