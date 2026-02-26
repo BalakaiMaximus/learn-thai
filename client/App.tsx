@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'wordquest', 'studymode', 'practice'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'wordquest', 'studymode', 'practice', 'both'
 
   const handleStart = () => {
     setCurrentPage('choices');
@@ -15,6 +15,8 @@ export default function App() {
       setCurrentPage('studymode');
     } else if (choice === 'Practice') {
       setCurrentPage('practice');
+    } else if (choice === 'Both') {
+      setCurrentPage('both');
     }
   };
 
@@ -170,6 +172,79 @@ export default function App() {
     );
   }
 
+  // ============ BOTH PAGE ============
+  if (currentPage === 'both') {
+    const words = [
+      { thai: 'สวัสดี', roman: 'Sawasdee', meaning: 'Hello' },
+      { thai: 'ขอบคุณ', roman: 'Khob Khun', meaning: 'Thank you' },
+      { thai: 'สบายดี', roman: 'Sabai Dee', meaning: 'Good/Well' },
+      { thai: 'หิว', roman: 'Hio', meaning: 'Hungry' },
+      { thai: 'เหนื่อย', roman: 'Neuy', meaning: 'Tired' },
+      { thai: 'มา', roman: 'Maa', meaning: 'Come' },
+      { thai: 'ไป', roman: 'Pai', meaning: 'Go' },
+      { thai: 'กิน', roman: 'Gin', meaning: 'Eat' },
+      { thai: 'ดื่ม', roman: 'Deum', meaning: 'Drink' },
+      { thai: 'นอน', roman: 'Non', meaning: 'Sleep' },
+    ];
+
+    const consonants = [
+      { letter: 'ก', name: 'Ko Kai', sound: 'G' },
+      { letter: 'ข', name: 'Kho Khai', sound: 'K' },
+      { letter: 'ฃ', name: 'Kho Khuat', sound: 'K' },
+      { letter: 'ค', name: 'Kho Kong', sound: 'K' },
+      { letter: 'ฅ', name: 'Kho Son', sound: 'K' },
+      { letter: 'ฆ', name: 'Kho Rai', sound: 'K' },
+      { letter: 'ง', name: 'Ngo Ngu', sound: 'NG' },
+      { letter: 'จ', name: 'Cho Chan', sound: 'J' },
+      { letter: 'ฉ', name: 'Cho Ching', sound: 'CH' },
+      { letter: 'ช', name: 'Cho Chang', sound: 'CH' },
+    ];
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.pageHeader}>
+          <TouchableOpacity onPress={goBack} style={styles.backButton}>
+            <Text style={styles.backButtonText}>← Back</Text>
+          </TouchableOpacity>
+          <Text style={styles.pageTitle}>🤝 Both Modes</Text>
+          <View style={{ width: 60 }} />
+        </View>
+        
+        <ScrollView style={styles.wordList}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+            <View style={{ flex: 1, minWidth: 300, marginRight: 16 }}>
+              <Text style={styles.sectionTitle}>📖 Word Quest</Text>
+              {words.map((word, index) => (
+                <View key={`word-${index}`} style={styles.wordCard}>
+                  <Text style={styles.wordThai}>{word.thai}</Text>
+                  <Text style={styles.wordRoman}>{word.roman}</Text>
+                  <Text style={styles.wordMeaning}>{word.meaning}</Text>
+                </View>
+              ))}
+            </View>
+            
+            <View style={{ flex: 1, minWidth: 300 }}>
+              <Text style={styles.sectionTitle}>📚 Study Mode</Text>
+              {consonants.map((item, index) => (
+                <View key={`cons-${index}`} style={styles.studyCard}>
+                  <Text style={styles.studyLetter}>{item.letter}</Text>
+                  <View style={styles.studyInfo}>
+                    <Text style={styles.studyName}>{item.name}</Text>
+                    <Text style={styles.studySound}>Sound: /{item.sound}/</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+        
+        <View style={styles.ground}>
+          <Text style={styles.groundTexture}>🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛🟫⬛🌱⬛</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   // ============ HOME PAGE ============
   return (
     <SafeAreaView style={styles.container}>
@@ -249,6 +324,17 @@ export default function App() {
               <View style={styles.choiceTextContainer}>
                 <Text style={styles.choiceTitle}>Practice</Text>
                 <Text style={styles.choiceDesc}>Review Words & Letters</Text>
+              </View>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.choiceButton, styles.choiceButtonBoth]} 
+              onPress={() => handleChoice('Both')}
+            >
+              <Text style={styles.choiceIcon}>🤝</Text>
+              <View style={styles.choiceTextContainer}>
+                <Text style={styles.choiceTitle}>Both</Text>
+                <Text style={styles.choiceDesc}>Word Quest & Study Mode side by side</Text>
               </View>
             </TouchableOpacity>
             
@@ -411,6 +497,9 @@ const styles = StyleSheet.create({
   },
   choiceButtonPlay: {
     borderColor: '#00FF00',
+  },
+  choiceButtonBoth: {
+    borderColor: '#FFA500',
   },
   choiceIcon: {
     fontSize: 32,
