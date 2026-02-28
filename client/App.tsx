@@ -31,16 +31,7 @@ export default function App() {
   // ============ WORD QUEST PAGE ============
   if (currentPage === 'wordquest') {
     const words = [
-      { thai: 'สวัสดี', roman: 'Sawasdee', meaning: 'Hello' },
-      { thai: 'ขอบคุณ', roman: 'Khob Khun', meaning: 'Thank you' },
-      { thai: 'สบายดี', roman: 'Sabai Dee', meaning: 'Good/Well' },
-      { thai: 'หิว', roman: 'Hio', meaning: 'Hungry' },
-      { thai: 'เหนื่อย', roman: 'Neuy', meaning: 'Tired' },
-      { thai: 'มา', roman: 'Maa', meaning: 'Come' },
-      { thai: 'ไป', roman: 'Pai', meaning: 'Go' },
-      { thai: 'กิน', roman: 'Gin', meaning: 'Eat' },
-      { thai: 'ดื่ม', roman: 'Deum', meaning: 'Drink' },
-      { thai: 'นอน', roman: 'Non', meaning: 'Sleep' },
+      { thai: 'ข้าว', roman: 'Khao', meaning: 'Rice' },
     ];
 
     return (
@@ -413,10 +404,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier',
   },
   startButton: {
-    backgroundColor: '#8B5CF6',
+    backgroundColor: '#3B82F6',
     borderWidth: 4,
-    borderColor: '#7C3AED',
-    borderBottomColor: '#6D28D9',
+    borderColor: '#2563EB',
+    borderBottomColor: '#1D4ED8',
     paddingVertical: 14,
     paddingHorizontal: 48,
     marginBottom: 30,
