@@ -256,7 +256,7 @@ export default function App() {
           <Text style={styles.title}>THAI CRAFT</Text>
         </View>
         
-        <Text style={styles.subtitle}>Craft your Thai skills one block at a time!</Text>
+        <Text style={styles.subtitle}>Aint no way!</Text>
         
         {/* Start Button */}
         <TouchableOpacity style={styles.startButton} onPress={handleStart}>
